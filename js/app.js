@@ -1,9 +1,10 @@
 
+
 (+function(){
 
     'use strict'
 
-
+//Load start screen
     $(document).ready(function(){
         $("div.screen-start").show();
         $(this).css("background-image", "url(../mockups/tictactoe-01-start.png) no-repeat");
@@ -16,6 +17,9 @@
 
     });
 
+//Debated whether to add to css file
+//Decided to put in from JS
+
     function startScreenCss(){
         $(".start").css("margin-top", "150px");
         $(".start").before("<label id='label'>Player 1:</label><br><form><input type='text' id='name'></form>");
@@ -25,6 +29,7 @@
 
 
     }
+//Same here
 
     function startGameCss(){
         $(".players").css({"outline": "2px solid #ccc", "padding-top":"1em", "padding-bottom":".75em"});
@@ -33,6 +38,8 @@
 
     }
 
+
+//Prompting for player to enter name
     var playerName;
 
     function startGame(){
@@ -44,11 +51,11 @@
             $(".board").show();
             $("#player1").addClass("active");
             $(".box").css("background-image", "none");
-            console.log(playerName);
+
         });
     }
 
-
+//Winning combo numbers
     var winningNums = [
         [0,1,2],
         [3,4,5],
@@ -60,15 +67,18 @@
         [2,4,6]
     ]
 
+//Empty arrays for player moves to check winning combos
     var player1 = [];
     var player2 = [];
 
+//Moves per game set to zero
     var movesPerGame = 0;
 
+//Checking so game tie isnt preemptive
     var hasGameEnded = false;
 
     var message;
-
+//toggle active class
     function toggleclass1(){
         $("#player1").removeClass("active");
         $("#player2").addClass("active");
@@ -79,12 +89,14 @@
         $("#player1").addClass("active");
     }
 
+//Function for auto play
     function switchPlayers(){
         autoPlay();
         movesPerGame += 1;
         window.setTimeout(toggleclass2, 425);
     }
 
+//Function for basic game play
     function gamePlay(){
         $(".box").click(function() {
             var moves1;
@@ -101,24 +113,16 @@
                     window.setTimeout(switchPlayers, 200);
 
                 }
-                // else if($("#player2").hasClass("active")){
-                //     $(this).addClass("box-filled-2");
-                //     $(this).addClass("filled");
-                //
-                //     moves2 = $(".box").index(this);
-                //     player2.push(moves2);
-                //     movesPerGame += 1;
-                //     window.setTimeout(toggleclass2, 100);
-                // }
+
             }
-            console.log(player2);
+
             gameOver();
         });
 
     }
 
 
-
+//Function to check game over
     function gameOver(){
         var check1;
         var check2;
@@ -151,7 +155,7 @@
             });
     }
 
-
+//Function for end game win screen
     function endGame(){
         $(".board").hide();
         $(".screen-win").show();
@@ -160,6 +164,8 @@
 
     }
 
+//Function for new game from new game button
+//Resets everything
     function newGame(){
         $(".screen-win").hide();
         $(".screen-start").hide();
@@ -175,15 +181,14 @@
         player2 = [];
     }
 
+//Rollover function for player 1 since player 2 is the computer
     function rollOver(){
         $(".box").mouseenter(function(){
             if($(this).hasClass("filled") === false){
                 if($("#player1").hasClass("active")){
                     $(this).css("background-image", "url('img/o.svg')");
                 }
-                // } else if($("#player2").hasClass("active")){
-                //     $(this).css("background-image", "url('img/x.svg')");
-                // }
+
             }
 
         });
@@ -194,8 +199,8 @@
         });
     }
 
+//Beginning of auto play program
     var boxArray = $("li.box").toArray();
-
 
     function autoPlay(){
 
@@ -215,7 +220,7 @@
     }
 
 
-
+//Initiate functions that havent been called
     rollOver();
     gamePlay();
 }());
