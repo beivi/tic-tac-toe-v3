@@ -204,7 +204,7 @@
 
     function autoPlay(){
 
-        var randSelect = Math.floor(Math.random() * 8) +1;
+        var randSelect = Math.floor(Math.random() * 9);
         var check = boxArray[randSelect];
         var moves2;
         if($(check).hasClass("filled") === false){
